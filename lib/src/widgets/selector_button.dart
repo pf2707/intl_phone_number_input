@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
 import 'package:intl_phone_number_input/src/utils/selector_config.dart';
@@ -122,7 +123,7 @@ class SelectorButton extends StatelessWidget {
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
-      builder: (BuildContext context) => AlertDialog(
+      builder: (BuildContext context) => CupertinoAlertDialog(
         content: Directionality(
           textDirection: Directionality.of(inheritedContext),
           child: Container(
@@ -138,6 +139,22 @@ class SelectorButton extends StatelessWidget {
           ),
         ),
       ),
+      // builder: (BuildContext context) => AlertDialog(
+      //   content: Directionality(
+      //     textDirection: Directionality.of(inheritedContext),
+      //     child: Container(
+      //       width: double.maxFinite,
+      //       child: CountrySearchListWidget(
+      //         countries,
+      //         locale,
+      //         searchBoxDecoration: searchBoxDecoration,
+      //         showFlags: selectorConfig.showFlags,
+      //         useEmoji: selectorConfig.useEmoji,
+      //         autoFocus: autoFocusSearchField,
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 
