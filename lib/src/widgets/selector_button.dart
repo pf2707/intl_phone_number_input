@@ -124,19 +124,26 @@ class SelectorButton extends StatelessWidget {
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
-      builder: (BuildContext context) => Scaffold(
-        body: AlertDialog(
-          content: Directionality(
-            textDirection: Directionality.of(inheritedContext),
-            child: Container(
-              width: double.maxFinite,
-              child: CountrySearchListWidget(
-                countries,
-                locale,
-                searchBoxDecoration: searchBoxDecoration,
-                showFlags: selectorConfig.showFlags,
-                useEmoji: selectorConfig.useEmoji,
-                autoFocus: autoFocusSearchField,
+      builder: (BuildContext context) => Material(
+        child: Localizations(
+          locale: const Locale('en', 'US'),
+          delegates: const [
+            DefaultWidgetsLocalizations.delegate,
+            DefaultMaterialLocalizations.delegate,
+          ],
+          child: AlertDialog(
+            content: Directionality(
+              textDirection: Directionality.of(inheritedContext),
+              child: Container(
+                width: double.maxFinite,
+                child: CountrySearchListWidget(
+                  countries,
+                  locale,
+                  searchBoxDecoration: searchBoxDecoration,
+                  showFlags: selectorConfig.showFlags,
+                  useEmoji: selectorConfig.useEmoji,
+                  autoFocus: autoFocusSearchField,
+                ),
               ),
             ),
           ),
