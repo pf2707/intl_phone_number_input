@@ -123,38 +123,24 @@ class SelectorButton extends StatelessWidget {
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        content: Directionality(
-          textDirection: Directionality.of(inheritedContext),
-          child: Container(
-            width: double.maxFinite,
-            child: CountrySearchListWidget(
-              countries,
-              locale,
-              searchBoxDecoration: searchBoxDecoration,
-              showFlags: selectorConfig.showFlags,
-              useEmoji: selectorConfig.useEmoji,
-              autoFocus: autoFocusSearchField,
+      builder: (BuildContext context) => Material(
+        child: AlertDialog(
+          content: Directionality(
+            textDirection: Directionality.of(inheritedContext),
+            child: Container(
+              width: double.maxFinite,
+              child: CountrySearchListWidget(
+                countries,
+                locale,
+                searchBoxDecoration: searchBoxDecoration,
+                showFlags: selectorConfig.showFlags,
+                useEmoji: selectorConfig.useEmoji,
+                autoFocus: autoFocusSearchField,
+              ),
             ),
           ),
         ),
-      ),
-      // builder: (BuildContext context) => AlertDialog(
-      //   content: Directionality(
-      //     textDirection: Directionality.of(inheritedContext),
-      //     child: Container(
-      //       width: double.maxFinite,
-      //       child: CountrySearchListWidget(
-      //         countries,
-      //         locale,
-      //         searchBoxDecoration: searchBoxDecoration,
-      //         showFlags: selectorConfig.showFlags,
-      //         useEmoji: selectorConfig.useEmoji,
-      //         autoFocus: autoFocusSearchField,
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      )
     );
   }
 
@@ -171,42 +157,44 @@ class SelectorButton extends StatelessWidget {
               topLeft: Radius.circular(12), topRight: Radius.circular(12))),
       useSafeArea: selectorConfig.useBottomSheetSafeArea,
       builder: (BuildContext context) {
-        return Stack(children: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: DraggableScrollableSheet(
-              builder: (BuildContext context, ScrollController controller) {
-                return Directionality(
-                  textDirection: Directionality.of(inheritedContext),
-                  child: Container(
-                    decoration: ShapeDecoration(
-                      color: Theme.of(context).canvasColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
+        return Material(
+          child: Stack(children: [
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: DraggableScrollableSheet(
+                builder: (BuildContext context, ScrollController controller) {
+                  return Directionality(
+                    textDirection: Directionality.of(inheritedContext),
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        color: Theme.of(context).canvasColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
                         ),
                       ),
+                      child: CountrySearchListWidget(
+                        countries,
+                        locale,
+                        searchBoxDecoration: searchBoxDecoration,
+                        scrollController: controller,
+                        showFlags: selectorConfig.showFlags,
+                        useEmoji: selectorConfig.useEmoji,
+                        autoFocus: autoFocusSearchField,
+                      ),
                     ),
-                    child: CountrySearchListWidget(
-                      countries,
-                      locale,
-                      searchBoxDecoration: searchBoxDecoration,
-                      scrollController: controller,
-                      showFlags: selectorConfig.showFlags,
-                      useEmoji: selectorConfig.useEmoji,
-                      autoFocus: autoFocusSearchField,
-                    ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ]);
+          ]),
+        );
       },
     );
   }
