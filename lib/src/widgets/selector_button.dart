@@ -75,8 +75,7 @@ class SelectorButton extends StatelessWidget {
                       selected = await showCountrySelectorBottomSheet(
                           context, countries);
                     } else {
-                      selected =
-                          await showCountrySelectorDialog(context, countries);
+                      // selected = await showCountrySelectorDialog(context, countries);
                     }
 
                     if (selected != null) {
