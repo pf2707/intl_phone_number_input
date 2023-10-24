@@ -123,8 +123,8 @@ class SelectorButton extends StatelessWidget {
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
-      builder: (BuildContext context) => Material(
-        child: AlertDialog(
+      builder: (BuildContext context) => Scaffold(
+        body: AlertDialog(
           content: Directionality(
             textDirection: Directionality.of(inheritedContext),
             child: Container(
@@ -157,8 +157,8 @@ class SelectorButton extends StatelessWidget {
               topLeft: Radius.circular(12), topRight: Radius.circular(12))),
       useSafeArea: selectorConfig.useBottomSheetSafeArea,
       builder: (BuildContext context) {
-        return Material(
-          child: Stack(children: [
+        return Scaffold(
+          body: Stack(children: [
             GestureDetector(
               onTap: () => Navigator.pop(context),
             ),
