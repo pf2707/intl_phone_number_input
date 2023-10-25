@@ -120,7 +120,7 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
   Future<Country?> showCountrySelectorDialog(
       BuildContext inheritedContext, List<Country> countries) {
-    log('change 3');
+    log('change 4');
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
