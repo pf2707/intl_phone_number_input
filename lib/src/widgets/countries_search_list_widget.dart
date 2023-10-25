@@ -36,6 +36,8 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
 
   @override
   void initState() {
+    log('change 1.0');
+
     final String value = _searchController.text.trim();
     filteredCountries = Utils.filterCountries(
       countries: widget.countries,
@@ -96,6 +98,9 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
                 itemCount: filteredCountries.length,
                 itemBuilder: (BuildContext context, int index) {
                   Country country = filteredCountries[index];
+
+                  log('change 1.1.2');
+
                   return Material(
                     child: Localizations(
                         locale: const Locale('en', 'US'),
@@ -152,6 +157,8 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
 
   @override
   void setState(fn) {
+    log('change 1.2');
+
     if (mounted) {
       super.setState(fn);
     }
@@ -174,6 +181,8 @@ class DirectionalCountryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('change 2.1');
+
     return ListTile(
       key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
       leading: (showFlags ? _Flag(country: country, useEmoji: useEmoji) : null),

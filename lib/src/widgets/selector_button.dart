@@ -145,7 +145,48 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.BOTTOM_SHEET] is selected
   Future<Country?> showCountrySelectorBottomSheet(
       BuildContext inheritedContext, List<Country> countries) {
-    log('change 6');
+    log('change 7');
+    return showCupertinoModalPopup(
+      context: inheritedContext,
+      builder: (BuildContext context) {
+        return Stack(children: [
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: DraggableScrollableSheet(
+              builder: (BuildContext context, ScrollController controller) {
+                return Directionality(
+                  textDirection: Directionality.of(inheritedContext),
+                  child: Container(
+                    decoration: ShapeDecoration(
+                      color: Theme.of(context).canvasColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12),
+                        ),
+                      ),
+                    ),
+                    child: CountrySearchListWidget(
+                      countries,
+                      locale,
+                      searchBoxDecoration: searchBoxDecoration,
+                      scrollController: controller,
+                      showFlags: selectorConfig.showFlags,
+                      useEmoji: selectorConfig.useEmoji,
+                      autoFocus: autoFocusSearchField,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ]);
+      }
+    );
     return showModalBottomSheet(
       context: inheritedContext,
       clipBehavior: Clip.hardEdge,
