@@ -120,7 +120,6 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
   Future<Country?> showCountrySelectorDialog(
       BuildContext inheritedContext, List<Country> countries) {
-    log('change 4');
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
@@ -129,22 +128,13 @@ class SelectorButton extends StatelessWidget {
           textDirection: Directionality.of(inheritedContext),
           child: Container(
             width: double.maxFinite,
-            child: Material(
-              child: Localizations(
-                locale: const Locale('en', 'US'),
-                delegates: const [
-                  DefaultWidgetsLocalizations.delegate,
-                  DefaultMaterialLocalizations.delegate,
-                ],
-                child: CountrySearchListWidget(
-                  countries,
-                  locale,
-                  searchBoxDecoration: searchBoxDecoration,
-                  showFlags: selectorConfig.showFlags,
-                  useEmoji: selectorConfig.useEmoji,
-                  autoFocus: autoFocusSearchField,
-                ),
-              ),
+            child: CountrySearchListWidget(
+              countries,
+              locale,
+              searchBoxDecoration: searchBoxDecoration,
+              showFlags: selectorConfig.showFlags,
+              useEmoji: selectorConfig.useEmoji,
+              autoFocus: autoFocusSearchField,
             )
           ),
         ),
@@ -155,6 +145,7 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.BOTTOM_SHEET] is selected
   Future<Country?> showCountrySelectorBottomSheet(
       BuildContext inheritedContext, List<Country> countries) {
+    log('change 5');
     return showModalBottomSheet(
       context: inheritedContext,
       clipBehavior: Clip.hardEdge,
@@ -165,43 +156,50 @@ class SelectorButton extends StatelessWidget {
               topLeft: Radius.circular(12), topRight: Radius.circular(12))),
       useSafeArea: selectorConfig.useBottomSheetSafeArea,
       builder: (BuildContext context) {
-        return Scaffold(
-          body: Stack(children: [
-            GestureDetector(
-              onTap: () => Navigator.pop(context),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: DraggableScrollableSheet(
-                builder: (BuildContext context, ScrollController controller) {
-                  return Directionality(
-                    textDirection: Directionality.of(inheritedContext),
-                    child: Container(
-                      decoration: ShapeDecoration(
-                        color: Theme.of(context).canvasColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12),
+        return Material(
+          child: Localizations(
+              locale: const Locale('en', 'US'),
+              delegates: const [
+                DefaultWidgetsLocalizations.delegate,
+                DefaultMaterialLocalizations.delegate,
+              ],
+              child: Stack(children: [
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: DraggableScrollableSheet(
+                    builder: (BuildContext context, ScrollController controller) {
+                      return Directionality(
+                        textDirection: Directionality.of(inheritedContext),
+                        child: Container(
+                          decoration: ShapeDecoration(
+                            color: Theme.of(context).canvasColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                              ),
+                            ),
+                          ),
+                          child: CountrySearchListWidget(
+                            countries,
+                            locale,
+                            searchBoxDecoration: searchBoxDecoration,
+                            scrollController: controller,
+                            showFlags: selectorConfig.showFlags,
+                            useEmoji: selectorConfig.useEmoji,
+                            autoFocus: autoFocusSearchField,
                           ),
                         ),
-                      ),
-                      child: CountrySearchListWidget(
-                        countries,
-                        locale,
-                        searchBoxDecoration: searchBoxDecoration,
-                        scrollController: controller,
-                        showFlags: selectorConfig.showFlags,
-                        useEmoji: selectorConfig.useEmoji,
-                        autoFocus: autoFocusSearchField,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ]),
+                      );
+                    },
+                  ),
+                ),
+              ]),
+          ),
         );
       },
     );
