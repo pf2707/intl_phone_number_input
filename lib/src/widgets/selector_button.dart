@@ -120,36 +120,35 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
   Future<Country?> showCountrySelectorDialog(
       BuildContext inheritedContext, List<Country> countries) {
-    log('change 2');
+    log('change 3');
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
-      builder: (BuildContext context) => Material(
-        child: Localizations(
-          locale: const Locale('en', 'US'),
-          delegates: const [
-            DefaultWidgetsLocalizations.delegate,
-            DefaultMaterialLocalizations.delegate,
-          ],
-          child: AlertDialog(
-            content: Directionality(
-              textDirection: Directionality.of(inheritedContext),
-              child: Container(
-                width: double.maxFinite,
-                color: Colors.yellow,
-                // child: CountrySearchListWidget(
-                //   countries,
-                //   locale,
-                //   searchBoxDecoration: searchBoxDecoration,
-                //   showFlags: selectorConfig.showFlags,
-                //   useEmoji: selectorConfig.useEmoji,
-                //   autoFocus: autoFocusSearchField,
-                // ),
+      builder: (BuildContext context) => AlertDialog(
+        content: Directionality(
+          textDirection: Directionality.of(inheritedContext),
+          child: Container(
+            width: double.maxFinite,
+            child: Material(
+              child: Localizations(
+                locale: const Locale('en', 'US'),
+                delegates: const [
+                  DefaultWidgetsLocalizations.delegate,
+                  DefaultMaterialLocalizations.delegate,
+                ],
+                child: CountrySearchListWidget(
+                  countries,
+                  locale,
+                  searchBoxDecoration: searchBoxDecoration,
+                  showFlags: selectorConfig.showFlags,
+                  useEmoji: selectorConfig.useEmoji,
+                  autoFocus: autoFocusSearchField,
+                ),
               ),
-            ),
+            )
           ),
         ),
-      )
+      ),
     );
   }
 
