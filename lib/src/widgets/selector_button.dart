@@ -145,7 +145,7 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.BOTTOM_SHEET] is selected
   Future<Country?> showCountrySelectorBottomSheet(
       BuildContext inheritedContext, List<Country> countries) {
-    log('change 5');
+    log('change 6');
     return showModalBottomSheet(
       context: inheritedContext,
       clipBehavior: Clip.hardEdge,

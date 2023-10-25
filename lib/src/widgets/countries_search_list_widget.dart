@@ -96,13 +96,28 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
                 itemCount: filteredCountries.length,
                 itemBuilder: (BuildContext context, int index) {
                   Country country = filteredCountries[index];
-
-                  return DirectionalCountryListTile(
-                    country: country,
-                    locale: widget.locale,
-                    showFlags: widget.showFlags!,
-                    useEmoji: widget.useEmoji!,
+                  return Material(
+                    child: Localizations(
+                        locale: const Locale('en', 'US'),
+                        delegates: const [
+                          DefaultWidgetsLocalizations.delegate,
+                          DefaultMaterialLocalizations.delegate,
+                        ],
+                        child:  DirectionalCountryListTile(
+                          country: country,
+                          locale: widget.locale,
+                          showFlags: widget.showFlags!,
+                          useEmoji: widget.useEmoji!,
+                        )
+                    ),
                   );
+                  // return DirectionalCountryListTile(
+                  //   country: country,
+                  //   locale: widget.locale,
+                  //   showFlags: widget.showFlags!,
+                  //   useEmoji: widget.useEmoji!,
+                  // );
+
                   // return ListTile(
                   //   key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
                   //   leading: widget.showFlags!
