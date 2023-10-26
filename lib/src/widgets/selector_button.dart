@@ -120,32 +120,53 @@ class SelectorButton extends StatelessWidget {
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
   Future<Country?> showCountrySelectorDialog(
       BuildContext inheritedContext, List<Country> countries) {
-    return showDialog(
+    return showCupertinoDialog(
       context: inheritedContext,
-      barrierDismissible: true,
-      builder: (BuildContext context) => AlertDialog(
-        content: Directionality(
-          textDirection: Directionality.of(inheritedContext),
-          child: Container(
-            width: double.maxFinite,
-            child: CountrySearchListWidget(
-              countries,
-              locale,
-              searchBoxDecoration: searchBoxDecoration,
-              showFlags: selectorConfig.showFlags,
-              useEmoji: selectorConfig.useEmoji,
-              autoFocus: autoFocusSearchField,
-            )
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Directionality(
+            textDirection: Directionality.of(inheritedContext),
+            child: Container(
+                width: double.maxFinite,
+                child: CountrySearchListWidget(
+                  countries,
+                  locale,
+                  searchBoxDecoration: searchBoxDecoration,
+                  showFlags: selectorConfig.showFlags,
+                  useEmoji: selectorConfig.useEmoji,
+                  autoFocus: autoFocusSearchField,
+                )
+            ),
           ),
-        ),
-      ),
+        );
+      }
     );
+    // return showDialog(
+    //   context: inheritedContext,
+    //   barrierDismissible: true,
+    //   builder: (BuildContext context) => AlertDialog(
+    //     content: Directionality(
+    //       textDirection: Directionality.of(inheritedContext),
+    //       child: Container(
+    //         width: double.maxFinite,
+    //         child: CountrySearchListWidget(
+    //           countries,
+    //           locale,
+    //           searchBoxDecoration: searchBoxDecoration,
+    //           showFlags: selectorConfig.showFlags,
+    //           useEmoji: selectorConfig.useEmoji,
+    //           autoFocus: autoFocusSearchField,
+    //         )
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.BOTTOM_SHEET] is selected
   Future<Country?> showCountrySelectorBottomSheet(
       BuildContext inheritedContext, List<Country> countries) {
-    log('change 7');
+    log('change 8');
     return showCupertinoModalPopup(
       context: inheritedContext,
       builder: (BuildContext context) {
@@ -187,62 +208,62 @@ class SelectorButton extends StatelessWidget {
         ]);
       }
     );
-    return showModalBottomSheet(
-      context: inheritedContext,
-      clipBehavior: Clip.hardEdge,
-      isScrollControlled: isScrollControlled,
-      backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12), topRight: Radius.circular(12))),
-      useSafeArea: selectorConfig.useBottomSheetSafeArea,
-      builder: (BuildContext context) {
-        return Material(
-          child: Localizations(
-              locale: const Locale('en', 'US'),
-              delegates: const [
-                DefaultWidgetsLocalizations.delegate,
-                DefaultMaterialLocalizations.delegate,
-              ],
-              child: Stack(children: [
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: DraggableScrollableSheet(
-                    builder: (BuildContext context, ScrollController controller) {
-                      return Directionality(
-                        textDirection: Directionality.of(inheritedContext),
-                        child: Container(
-                          decoration: ShapeDecoration(
-                            color: Theme.of(context).canvasColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(12),
-                                topRight: Radius.circular(12),
-                              ),
-                            ),
-                          ),
-                          child: CountrySearchListWidget(
-                            countries,
-                            locale,
-                            searchBoxDecoration: searchBoxDecoration,
-                            scrollController: controller,
-                            showFlags: selectorConfig.showFlags,
-                            useEmoji: selectorConfig.useEmoji,
-                            autoFocus: autoFocusSearchField,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ]),
-          ),
-        );
-      },
-    );
+    // return showModalBottomSheet(
+    //   context: inheritedContext,
+    //   clipBehavior: Clip.hardEdge,
+    //   isScrollControlled: isScrollControlled,
+    //   backgroundColor: Colors.transparent,
+    //   shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.only(
+    //           topLeft: Radius.circular(12), topRight: Radius.circular(12))),
+    //   useSafeArea: selectorConfig.useBottomSheetSafeArea,
+    //   builder: (BuildContext context) {
+    //     return Material(
+    //       child: Localizations(
+    //           locale: const Locale('en', 'US'),
+    //           delegates: const [
+    //             DefaultWidgetsLocalizations.delegate,
+    //             DefaultMaterialLocalizations.delegate,
+    //           ],
+    //           child: Stack(children: [
+    //             GestureDetector(
+    //               onTap: () => Navigator.pop(context),
+    //             ),
+    //             Padding(
+    //               padding: EdgeInsets.only(
+    //                   bottom: MediaQuery.of(context).viewInsets.bottom),
+    //               child: DraggableScrollableSheet(
+    //                 builder: (BuildContext context, ScrollController controller) {
+    //                   return Directionality(
+    //                     textDirection: Directionality.of(inheritedContext),
+    //                     child: Container(
+    //                       decoration: ShapeDecoration(
+    //                         color: Theme.of(context).canvasColor,
+    //                         shape: RoundedRectangleBorder(
+    //                           borderRadius: BorderRadius.only(
+    //                             topLeft: Radius.circular(12),
+    //                             topRight: Radius.circular(12),
+    //                           ),
+    //                         ),
+    //                       ),
+    //                       child: CountrySearchListWidget(
+    //                         countries,
+    //                         locale,
+    //                         searchBoxDecoration: searchBoxDecoration,
+    //                         scrollController: controller,
+    //                         showFlags: selectorConfig.showFlags,
+    //                         useEmoji: selectorConfig.useEmoji,
+    //                         autoFocus: autoFocusSearchField,
+    //                       ),
+    //                     ),
+    //                   );
+    //                 },
+    //               ),
+    //             ),
+    //           ]),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }
